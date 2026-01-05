@@ -12,5 +12,6 @@ public class MapProfile : Profile
         CreateMap<Car, CarDto>().ReverseMap();
         CreateMap<Customer, CustomerDto>().ReverseMap();
         CreateMap<Rental, RentalDto>().ReverseMap();
+        CreateMap<CarUpdateDto, Car>();
     }
 }
