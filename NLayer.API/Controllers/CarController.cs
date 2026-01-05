@@ -9,9 +9,9 @@ namespace NLayer.API.Controllers;
 public class CarController : CustomBaseController
 {
     private readonly IMapper _mapper;
-    private readonly IService<Car> _service;
+    private readonly ICarService _service;
 
-    public CarController(IService<Car> service, IMapper mapper)
+    public CarController(ICarService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
@@ -54,5 +54,10 @@ public class CarController : CustomBaseController
         await _service.Delete(car);
         return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
     }
-    
+
+    [HttpGet("[action]")]
+    public async Task<IActionResult> GetCarsByBrand()
+    {
+        return CreateActionResult(await _service.CarsByBrand());
+    }
 }

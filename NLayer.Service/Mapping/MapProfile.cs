@@ -13,5 +13,6 @@ public class MapProfile : Profile
         CreateMap<Customer, CustomerDto>().ReverseMap();
         CreateMap<Rental, RentalDto>().ReverseMap();
         CreateMap<CarUpdateDto, Car>();
+        CreateMap<Car, CarWithBrandDto>();
     }
 }
