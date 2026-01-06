@@ -9,17 +9,17 @@ namespace NLayer.API.Controllers;
 public class CarController : CustomBaseController
 {
     private readonly IMapper _mapper;
-    private readonly ICarService _service;
+    private readonly ICarService _carService;
 
-    public CarController(ICarService service, IMapper mapper)
+    public CarController(ICarService carService, IMapper mapper)
     {
-        _service = service;
+        _carService = carService;
         _mapper = mapper;
     }
     
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        var cars = await _service.GetAllAsync();
+        var cars = await _carService.GetAllAsync();
         var carDtos = _mapper.Map<List<CarDto>>(cars);
         return CreateActionResult(CustomResponseDto<List<CarDto>>.Success(carDtos,200));
     }
@@ -27,7 +27,7 @@ public class CarController : CustomBaseController
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCarById(int id)
     {
-        var car = await _service.GetByIdAsync(id);
+        var car = await _carService.GetByIdAsync(id);
         var carDto = _mapper.Map<CarDto>(car);
         return CreateActionResult(CustomResponseDto<CarDto>.Success(carDto, 200));
     }
@@ -35,7 +35,7 @@ public class CarController : CustomBaseController
     [HttpPost]
     public async Task<IActionResult> AddCar(CarDto carDtos)
     {
-        var car = await _service.AddAsync(_mapper.Map<Car>(carDtos));
+        var car = await _carService.AddAsync(_mapper.Map<Car>(carDtos));
         var carDto = _mapper.Map<CarDto>(car);
         return CreateActionResult(CustomResponseDto<CarDto>.Success(carDto, 201));
     }
@@ -43,21 +43,21 @@ public class CarController : CustomBaseController
     [HttpPut]
     public async Task<IActionResult> Update(CarUpdateDto carUpdateDto)
     {
-        await _service.UpdateAsync(_mapper.Map<Car>(carUpdateDto));
+        await _carService.UpdateAsync(_mapper.Map<Car>(carUpdateDto));
         return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCar(int id)
     {
-        var car = await _service.GetByIdAsync(id);
-        await _service.DeleteAsync(car);
+        var car = await _carService.GetByIdAsync(id);
+        await _carService.DeleteAsync(car);
         return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
     }
 
     [HttpGet("[action]")]
     public async Task<IActionResult> GetCarsByBrand()
     {
-        return CreateActionResult(await _service.CarsByBrand());
+        return CreateActionResult(await _carService.CarsByBrand());
     }
 }

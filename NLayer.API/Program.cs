@@ -28,6 +28,8 @@ builder.Services.AddScoped<IRentalService, RentalService>();
 builder.Services.AddScoped<IRentalRepository, RentalRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
