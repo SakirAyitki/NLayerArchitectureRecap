@@ -16,5 +16,6 @@ public class MapProfile : Profile
         CreateMap<Car, CarWithBrandDto>();
         CreateMap<Rental, RentalWithCustomerDto>();
         CreateMap<RentalUpdateDto, Rental>();
+        CreateMap<CustomerUpdateDto, Customer>();
     }
 }
