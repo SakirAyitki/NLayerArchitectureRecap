@@ -46,5 +46,19 @@ public class RentalController : CustomBaseController
         var rentalDtos = _mapper.Map<RentalDto>(rental);
         return CreateActionResult(CustomResponseDto<RentalDto>.Success(rentalDtos,201));
     }
-    
+
+    [HttpPut]
+    public async Task<IActionResult> Update(RentalUpdateDto rentalUpdateDto)
+    {
+        await _rentalService.UpdateAsync(_mapper.Map<Rental>(rentalUpdateDto));
+        return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var rental = await _rentalService.GetByIdAsync(id);
+        await _rentalService.DeleteAsync(rental);
+        return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+    }
 }
