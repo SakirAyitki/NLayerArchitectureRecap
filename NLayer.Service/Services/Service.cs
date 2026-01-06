@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
@@ -48,9 +49,9 @@ public class Service<T> : IService<T> where T : class
         await _unitOfWork.CommitAsync();
     }
 
-    public IQueryable<T> GetAll()
+    public async Task<IEnumerable<T>> GetAllAsync()
     {
-        return _repository.GetAll();
+        return await _repository.GetAll().ToListAsync();
     }
 
     public IQueryable<T> Where(Expression<Func<T, bool>> expression)

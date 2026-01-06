@@ -14,6 +14,7 @@ public class RentalConfiguration : IEntityTypeConfiguration<Rental>
         builder.Property(x=>x.ReturnDate).IsRequired().HasColumnType("date");
         builder.Property(x=>x.TotalPrice).IsRequired().HasColumnType("decimal(18,2)");
         
+        builder.HasOne(x=>x.Customer).WithMany(x=>x.Rentals).HasForeignKey(x=>x.CustomerId);
         
     }
 }

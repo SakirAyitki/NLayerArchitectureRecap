@@ -19,7 +19,7 @@ public class CarController : CustomBaseController
     
     [HttpGet]
     public async Task<IActionResult> GetAll(){
-        var cars = _service.GetAll();
+        var cars = await _service.GetAllAsync();
         var carDtos = _mapper.Map<List<CarDto>>(cars);
         return CreateActionResult(CustomResponseDto<List<CarDto>>.Success(carDtos,200));
     }

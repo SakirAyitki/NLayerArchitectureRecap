@@ -24,7 +24,8 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICarRepository, CarsRepository>();
-
+builder.Services.AddScoped<IRentalService, RentalService>();
+builder.Services.AddScoped<IRentalRepository, RentalRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 

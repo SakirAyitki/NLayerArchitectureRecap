@@ -11,7 +11,7 @@ public interface IService<T> where T:class
     Task Delete(T entity);
     Task DeleteRange(IEnumerable<T> entities);
     
-    IQueryable<T> GetAll();
+    Task<IEnumerable<T>> GetAllAsync();
     IQueryable<T> Where(Expression<Func<T, bool>> expression);
 
     Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
