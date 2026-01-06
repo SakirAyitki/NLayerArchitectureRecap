@@ -40,10 +40,10 @@ public class CarController : CustomBaseController
         return CreateActionResult(CustomResponseDto<CarDto>.Success(carDto, 201));
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateCar(CarUpdateDto carUpdateDto)
+    [HttpPut]
+    public async Task<IActionResult> Update(CarUpdateDto carUpdateDto)
     {
-        await _service.Update(_mapper.Map<Car>(carUpdateDto));
+        await _service.UpdateAsync(_mapper.Map<Car>(carUpdateDto));
         return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
     }
 
@@ -51,7 +51,7 @@ public class CarController : CustomBaseController
     public async Task<IActionResult> DeleteCar(int id)
     {
         var car = await _service.GetByIdAsync(id);
-        await _service.Delete(car);
+        await _service.DeleteAsync(car);
         return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
     }
 

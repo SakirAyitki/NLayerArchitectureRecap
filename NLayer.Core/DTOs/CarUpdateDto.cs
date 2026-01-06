@@ -2,6 +2,7 @@ namespace NLayer.Core.DTOs;
 
 public class CarUpdateDto
 {
+    public int Id { get; set; }
     public int Year { get; set; }
     public string Plate { get; set; }
     public string Model { get; set; }

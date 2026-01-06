@@ -31,13 +31,13 @@ public class Service<T> : IService<T> where T : class
         return entities;
     }
 
-    public async Task Update(T entity)
+    public async Task UpdateAsync(T entity)
     {
         _repository.Update(entity);
         await _unitOfWork.CommitAsync();
     }
 
-    public async Task Delete(T entity)
+    public async Task DeleteAsync(T entity)
     {
         _repository.Delete(entity);
         await _unitOfWork.CommitAsync();

@@ -7,8 +7,8 @@ public interface IService<T> where T:class
     Task<T> AddAsync(T entity);
     Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
     
-    Task Update(T entity);
-    Task Delete(T entity);
+    Task UpdateAsync(T entity);
+    Task DeleteAsync(T entity);
     Task DeleteRange(IEnumerable<T> entities);
     
     Task<IEnumerable<T>> GetAllAsync();

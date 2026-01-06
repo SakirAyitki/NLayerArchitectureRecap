@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NLayer.Core.DTOs;
+using NLayer.Core.Models;
 using NLayer.Core.Services;
 
 namespace NLayer.API.Controllers;
@@ -37,4 +38,13 @@ public class RentalController : CustomBaseController
     {
         return CreateActionResult(await _rentalService.RentalsWithCustomer());
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(RentalDto rentalDto)
+    {
+        var rental = await _rentalService.AddAsync(_mapper.Map<Rental>(rentalDto)); 
+        var rentalDtos = _mapper.Map<RentalDto>(rental);
+        return CreateActionResult(CustomResponseDto<RentalDto>.Success(rentalDtos,201));
+    }
+    
 }
