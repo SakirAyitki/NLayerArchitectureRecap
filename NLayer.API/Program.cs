@@ -9,12 +9,26 @@ using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWorks;
 using NLayer.Service.Mapping;
 using NLayer.Service.Services;
+using NLayer.Service.Validation;
+using FluentValidation.AspNetCore;
+using NLayer.API.Filters;
 
+#pragma warning disable CS0618 // Type or member is obsolete
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute()))
+    .AddFluentValidation(x =>
+    {
+        x.RegisterValidatorsFromAssemblyContaining<BrandDtoValidator>();
+        x.RegisterValidatorsFromAssemblyContaining<CarDtoValidator>();
+        x.RegisterValidatorsFromAssemblyContaining<RentalDtoValidator>();
+        x.RegisterValidatorsFromAssemblyContaining<CustomerDtoValidator>();
+    });
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>{ options.SuppressModelStateInvalidFilter = true; });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
