@@ -1,4 +1,6 @@
 using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
@@ -14,6 +16,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NLayer.API.Filters;
 using NLayer.API.Middlewares;
+using NLayer.API.Modules;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 
@@ -62,6 +65,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
             );
         });
 });
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+    containerBuilder.RegisterModule(new RepoServiceModule()));
 
 var app = builder.Build();
 
