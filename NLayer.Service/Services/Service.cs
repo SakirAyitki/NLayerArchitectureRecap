@@ -70,7 +70,7 @@ public class Service<T> : IService<T> where T : class
         var hasEntity = await _repository.GetByIdAsync(id);
         if (hasEntity == null)
         {
-            throw new NotFoundException($"{typeof(T).Name} does not exist)");
+            throw new NotFoundException($"{typeof(T).Name} does not exist");
         }
         return hasEntity;
     }

@@ -11,6 +11,7 @@ using NLayer.Service.Mapping;
 using NLayer.Service.Services;
 using NLayer.Service.Validation;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NLayer.API.Filters;
 using NLayer.API.Middlewares;
 
@@ -33,6 +34,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>{ options.SuppressModel
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

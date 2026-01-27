@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Models;
 using NLayer.Core.Services;
@@ -24,6 +25,7 @@ public class CarController : CustomBaseController
         return CreateActionResult(CustomResponseDto<List<CarDto>>.Success(carDtos,200));
     }
 
+    [ServiceFilter(typeof(NotFoundFilter<Car>))]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCarById(int id)
     {
