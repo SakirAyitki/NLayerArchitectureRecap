@@ -12,6 +12,7 @@ using NLayer.Service.Services;
 using NLayer.Service.Validation;
 using FluentValidation.AspNetCore;
 using NLayer.API.Filters;
+using NLayer.API.Middlewares;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 
@@ -68,6 +69,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomException();
 
 app.MapControllers();
 
