@@ -41,18 +41,6 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-builder.Services.AddScoped<ICarService, CarServiceWithNoCaching>();
-builder.Services.AddScoped<ICarRepository, CarsRepository>();
-builder.Services.AddScoped<IRentalService, RentalService>();
-builder.Services.AddScoped<IRentalRepository, RentalRepository>();
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IBrandService, BrandServiceWithNoCaching>();
-builder.Services.AddScoped<IBrandRepository, BrandRepository>();
-
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddDbContext<AppDbContext>(options =>
