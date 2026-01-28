@@ -6,11 +6,11 @@ using NLayer.Core.UnitOfWorks;
 
 namespace NLayer.Service.Services;
 
-public class CustomerService : Service<Customer>, ICustomerService
+public class CustomerServiceWithNoCaching : Service<Customer>, ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IMapper _mapper;
-    public CustomerService(IGenericRepository<Customer> repository, IUnitOfWork unitOfWork, ICustomerRepository customerRepository, IMapper mapper) : base(repository, unitOfWork)
+    public CustomerServiceWithNoCaching(IGenericRepository<Customer> repository, IUnitOfWork unitOfWork, ICustomerRepository customerRepository, IMapper mapper) : base(repository, unitOfWork)
     {
         _customerRepository = customerRepository;
         _mapper = mapper;

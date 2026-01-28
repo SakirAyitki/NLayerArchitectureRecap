@@ -7,12 +7,12 @@ using NLayer.Core.UnitOfWorks;
 
 namespace NLayer.Service.Services;
 
-public class RentalService : Service<Rental>, IRentalService
+public class RentalServiceWithNoCaching : Service<Rental>, IRentalService
 {
     private readonly IRentalRepository _rentalRepository;
     private readonly IMapper _mapper;
     
-    public RentalService(IGenericRepository<Rental> repository, IUnitOfWork unitOfWork, IRentalRepository rentalRepository, IMapper mapper) : base(repository, unitOfWork)
+    public RentalServiceWithNoCaching(IGenericRepository<Rental> repository, IUnitOfWork unitOfWork, IRentalRepository rentalRepository, IMapper mapper) : base(repository, unitOfWork)
     {
         _rentalRepository = rentalRepository;
         _mapper = mapper;

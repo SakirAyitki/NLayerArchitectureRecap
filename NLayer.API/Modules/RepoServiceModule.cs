@@ -36,6 +36,12 @@ public class RepoServiceModule : Module
         
         builder.RegisterType<BrandServiceWithCaching>()
             .As<IBrandService>();
+
+        builder.RegisterType<CustomerServiceWithCaching>()
+            .As(typeof(ICustomerService));
+        
+        builder.RegisterType<RentalServiceWithCaching>()
+            .As<IRentalService>();
         
         builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, serviceAssembly)
             .Where(x => x.Name.EndsWith("Repository"))
