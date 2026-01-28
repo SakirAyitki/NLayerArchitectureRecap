@@ -28,7 +28,7 @@ public class BrandServiceWithCaching : IBrandService
 
         if (!_memoryCache.TryGetValue(BrandCacheKey, out _))
         {
-            _memoryCache.Set(BrandCacheKey, _repository.GetAll());
+            _memoryCache.Set(BrandCacheKey, _repository.GetAll().ToList());
         }
 
     }
