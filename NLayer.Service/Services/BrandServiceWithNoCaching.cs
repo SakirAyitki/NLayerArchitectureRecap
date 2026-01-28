@@ -6,12 +6,12 @@ using NLayer.Core.UnitOfWorks;
 
 namespace NLayer.Service.Services;
 
-public class BrandService : Service<Brand>, IBrandService
+public class BrandServiceWithNoCaching : Service<Brand>, IBrandService
 {
     private readonly IBrandRepository _brandRepository;
     private readonly IMapper _mapper;
     
-    public BrandService(IGenericRepository<Brand> repository, IUnitOfWork unitOfWork, IBrandRepository brandRepository, IMapper mapper) : base(repository, unitOfWork)
+    public BrandServiceWithNoCaching(IGenericRepository<Brand> repository, IUnitOfWork unitOfWork, IBrandRepository brandRepository, IMapper mapper) : base(repository, unitOfWork)
     {
         _brandRepository = brandRepository;
         _mapper = mapper;

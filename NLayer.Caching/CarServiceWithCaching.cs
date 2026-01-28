@@ -38,7 +38,7 @@ public class CarServiceWithCaching : ICarService
     {
         await _repository.AddAsync(entity);
         await _unitOfWork.CommitAsync();
-        await CacheAllCars();
+        await CacheAllCarsAsync();
         return entity;
     }
 
@@ -46,7 +46,7 @@ public class CarServiceWithCaching : ICarService
     {
         await _repository.AddRangeAsync(entities);
         await _unitOfWork.CommitAsync();
-        await CacheAllCars();
+        await CacheAllCarsAsync();
         return entities;
     }
 
@@ -54,21 +54,21 @@ public class CarServiceWithCaching : ICarService
     {
         _repository.Update(entity);
         await _unitOfWork.CommitAsync();
-        await CacheAllCars();
+        await CacheAllCarsAsync();
     }
 
     public async Task DeleteAsync(Car entity)
     {
         _repository.Delete(entity);
         await _unitOfWork.CommitAsync();
-        await CacheAllCars();
+        await CacheAllCarsAsync();
     }
 
     public async Task DeleteRange(IEnumerable<Car> entities)
     {
         _repository.DeleteRange(entities);
         await _unitOfWork.CommitAsync();
-        await CacheAllCars();
+        await CacheAllCarsAsync();
     }
 
     public async Task<IEnumerable<Car>> GetAllAsync()
@@ -83,7 +83,7 @@ public class CarServiceWithCaching : ICarService
 
     public async Task<bool> AnyAsync(Expression<Func<Car, bool>> expression)
     {
-       return await _repository.AnyAsync(expression);
+        return await Task.FromResult(_memoryCache.Get<List<Car>>(CarCacheKey).Any(expression.Compile()));
     }
 
     public async Task<Car> GetByIdAsync(int id)
@@ -103,7 +103,7 @@ public class CarServiceWithCaching : ICarService
         return CustomResponseDto<List<CarWithBrandDto>>.Success(carsByBrandDto,200);
     }
 
-    public async Task CacheAllCars()
+    public async Task CacheAllCarsAsync()
     {
         _memoryCache.Set(CarCacheKey, await _repository.GetAll().ToListAsync());
     }

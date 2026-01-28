@@ -34,6 +34,9 @@ public class RepoServiceModule : Module
         builder.RegisterType<CarServiceWithCaching>()
             .As<ICarService>();
         
+        builder.RegisterType<BrandServiceWithCaching>()
+            .As<IBrandService>();
+        
         builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, serviceAssembly)
             .Where(x => x.Name.EndsWith("Repository"))
             .AsImplementedInterfaces().InstancePerLifetimeScope();
